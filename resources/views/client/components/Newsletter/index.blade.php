@@ -1,3 +1,6 @@
+@php
+$dataNewletter = \App\Models\newletter::where('status',2)->first();
+@endphp
 <!-- Start News letter popup -->
 <div class="newsletter__popup" data-animation="slideInUp">
     <div id="boxes" class="newsletter__popup--inner">
@@ -6,16 +9,22 @@
         </button>
         <div class="box newsletter__popup--box d-flex align-items-center">
             <div class="newsletter__popup--thumbnail">
-                <img class="newsletter__popup--thumbnail__img display-block" src="{{ asset('client/assets/img/banner/newsletter-popup-thumb2.png') }}" alt="newsletter-popup-thumb">
+                <img class="newsletter__popup--thumbnail__img display-block" src="{{ asset($dataNewletter->image_url_newletter) }}" alt="newsletter-popup-thumb">
             </div>
             <div class="newsletter__popup--box__right">
                 <h2 class="newsletter__popup--title">Join Our Newsletter</h2>
                 <div class="newsletter__popup--content">
-                    <label class="newsletter__popup--content--desc">Enter your email address to subscribe our notification of our new post &amp; features by email.</label>
+                    <label class="newsletter__popup--content--desc">{{ $dataNewletter->	des_newleter }}</label>
                     <div class="newsletter__popup--subscribe" id="frm_subscribe">
-                        <form class="newsletter__popup--subscribe__form">
-                            <input class="newsletter__popup--subscribe__input" type="text" placeholder="Enter you email address here...">
-                            <button class="newsletter__popup--subscribe__btn">Subscribe</button>
+                        <form class="newsletter__popup--subscribe__form" action="{{ route('infoNewsletter.create') }}" method="post">
+                            @csrf
+                            <input class="newsletter__popup--subscribe__input" name="EmailUser" type="text" placeholder="Enter you email address here...">
+                            @error('EmailUser')
+                            <div class="text-danger mt-4 mb-4" >
+                                🔴 <span>{{ $message }}</span>
+                            </div>
+                            @enderror
+                            <button type="submit" class="newsletter__popup--subscribe__btn">Subscribe</button>
                         </form>
                         <div class="newsletter__popup--footer">
                             <input type="checkbox" id="newsletter__dont--show">

@@ -75,7 +75,7 @@
                                     </g>
                                 </svg>
                                 <span class="header__account--btn__text"> My cart</span>
-                                <span class="items__count">02</span>
+                                <span class="items__count __cart">0</span>
                             </a>
                         </li>
                     </ul>
@@ -87,7 +87,7 @@
                                 <a class="header__menu--link" href="{{ route('home') }}">Home                                </a>
                             </li>
                             <li class="header__menu--items mega__menu--items style2">
-                                <a class="header__menu--link" href="shop.html">Shop</a>
+                                <a class="header__menu--link" href="{{ route('product.index') }}">Shop</a>
                             </li>
                             <li class="header__menu--items style2">
                                 <a class="header__menu--link" href="about.html">About US </a>
@@ -116,10 +116,17 @@
                             </a>
                         </li>
                         <li class="header__account--items header__account2--items">
-                            <a class="header__account--btn" href="{{ route('auth.login') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg"  width="26.51" height="23.443" viewBox="0 0 512 512"><path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
-                                <span class="visually-hidden">My Account</span>
-                            </a>
+                            @auth
+                                <a class="header__account--btn" href="{{ route('auth.profile') }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg"  width="26.51" height="23.443" viewBox="0 0 512 512"><path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
+                                        <span class="visually-hidden">My Account</span>
+                                </a>
+                            @else
+                                <a class="header__account--btn" href="{{ route('auth.login') }}">
+                                    <svg xmlns="http://www.w3.org/2000/svg"  width="26.51" height="23.443" viewBox="0 0 512 512"><path d="M344 144c-3.92 52.87-44 96-88 96s-84.15-43.12-88-96c-4-55 35-96 88-96s92 42 88 96z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32"/><path d="M256 304c-87 0-175.3 48-191.64 138.6C62.39 453.52 68.57 464 80 464h352c11.44 0 17.62-10.48 15.65-21.4C431.3 352 343 304 256 304z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/></svg>
+                                    <span class="visually-hidden">My Account</span>
+                                </a>
+                            @endauth
                         </li>
                         <li class="header__account--items header__account2--items d-none d-lg-block">
                             <a class="header__account--btn" href="wishlist.html">
@@ -138,7 +145,7 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <span class="items__count style2">02</span>
+                                <span class="items__count style2 __cart">0</span>
                             </a>
                         </li>
                     </ul>
@@ -156,7 +163,7 @@
                                 <a class="header__menu--link" href="{{ route('home') }}">Home </a>
                             </li>
                             <li class="header__menu--items mega__menu--items">
-                                <a class="header__menu--link" href="shop.html">Shop</a>
+                                <a class="header__menu--link" href="{{ route('product.index') }}">Shop</a>
                             </li>
                             <li class="header__menu--items">
                                 <a class="header__menu--link" href="about.html">About US </a>
@@ -384,52 +391,7 @@
             <p class="minicart__header--desc">Clothing and fashion products are limited</p>
         </div>
         <div class="minicart__product">
-            <div class="minicart__product--items d-flex">
-                <div class="minicart__thumb">
-                    <a href="product-details.html"><img src="{{ asset('client/assets/img/product/product1.png') }}" alt="prduct-img"></a>
-                </div>
-                <div class="minicart__text">
-                    <h3 class="minicart__subtitle h4"><a href="product-details.html">Oversize Cotton Dress</a></h3>
-                    <span class="color__variant"><b>Color:</b> Beige</span>
-                    <div class="minicart__price">
-                        <span class="current__price">$125.00</span>
-                        <span class="old__price">$140.00</span>
-                    </div>
-                    <div class="minicart__text--footer d-flex align-items-center">
-                        <div class="quantity__box minicart__quantity">
-                            <button type="button"  class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</button>
-                            <label>
-                                <input type="number" class="quantity__number" value="1" data-counter />
-                            </label>
-                            <button type="button" class="quantity__value increase"  value="Increase Value">+</button>
-                        </div>
-                        <button class="minicart__product--remove">Remove</button>
-                    </div>
-                </div>
-            </div>
-            <div class="minicart__product--items d-flex">
-                <div class="minicart__thumb">
-                    <a href="product-details.html"><img src="{{ asset('client/assets/img/product/product2.png') }}" alt="prduct-img"></a>
-                </div>
-                <div class="minicart__text">
-                    <h3 class="minicart__subtitle h4"><a href="product-details.html">Boxy Denim Jacket</a></h3>
-                    <span class="color__variant"><b>Color:</b> Green</span>
-                    <div class="minicart__price">
-                        <span class="current__price">$115.00</span>
-                        <span class="old__price">$130.00</span>
-                    </div>
-                    <div class="minicart__text--footer d-flex align-items-center">
-                        <div class="quantity__box minicart__quantity">
-                            <button type="button" class="quantity__value decrease" aria-label="quantity value" value="Decrease Value">-</button>
-                            <label>
-                                <input type="number" class="quantity__number" value="1" data-counter />
-                            </label>
-                            <button type="button" class="quantity__value increase" aria-label="quantity value" value="Increase Value">+</button>
-                        </div>
-                        <button class="minicart__product--remove">Remove</button>
-                    </div>
-                </div>
-            </div>
+
         </div>
         <div class="minicart__amount">
             <div class="minicart__amount_list d-flex justify-content-between">
@@ -440,10 +402,6 @@
                 <span>Total:</span>
                 <span><b>$240.00</b></span>
             </div>
-        </div>
-        <div class="minicart__conditions text-center">
-            <input class="minicart__conditions--input" id="accept" type="checkbox">
-            <label class="minicart__conditions--label" for="accept">I agree with the <a class="minicart__conditions--link" href="privacy-policy.html">Privacy and Policy</a></label>
         </div>
         <div class="minicart__button d-flex justify-content-center">
             <a class="primary__btn minicart__button--link" href="cart.html">View cart</a>

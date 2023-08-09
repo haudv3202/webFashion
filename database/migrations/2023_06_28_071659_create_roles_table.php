@@ -25,9 +25,7 @@ return new class extends Migration
             ['name' => 'Admin']
         ];
 
-        foreach ($roles as $role) {
-            DB::table('roles')->insert($role);
-        }
+            DB::table('roles')->insert($roles);
     }
 
     /**

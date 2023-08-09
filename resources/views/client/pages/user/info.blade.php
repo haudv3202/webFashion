@@ -24,38 +24,70 @@
                     <div class="account__content">
                         <h2 class="account__content--title h3 mb-20">Thông tin người dùng</h2>
                         <div class="account__table--area">
-                            <form action="{{ route('auth.update') }}">
+                            <form action="{{ route('auth.update') }}" method="post">
+                                @csrf
                                 @php
                                     $user = \Illuminate\Support\Facades\Auth::user();
                                 @endphp
+                                <input type="hidden" name="idAuth" value="{{ $user->id }}">
                                 <div class="row">
                                     <div class="col-6">
                                         <label for="username">Tên tài khoản</label>
-                                        <input class="account__login--input" id="username" name="name" placeholder="Name" value="{{ $user->name }}" type="text">
+                                        <input class="account__login--input" id="username" name="name" placeholder="Name" value="{{ old('name',$user->name) }}" type="text">
+                                        @error('name')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="email">Email</label>
-                                        <input class="account__login--input" id="email" name="email" placeholder="Email Address" value="{{ $user->email }}" type="text">
+                                        <input class="account__login--input" id="email" name="email" placeholder="Email Address" value="{{ old('email',$user->email) }}" type="text">
+                                        @error('email')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="address">Địa Chỉ</label>
-                                        <input class="account__login--input" id="address" name="address" placeholder="Address" value="{{ $user->address == null ? 'Chưa cập nhật' :  $user->address }}" type="text">
+                                        <input class="account__login--input" id="address" name="address" placeholder="Address" value="{{ old('address',$user->address == null ? 'Chưa cập nhật' :  $user->address) }}" type="text">
+                                        @error('address')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="birthday">Ngày sinh</label>
-                                        <input class="account__login--input" id="birthday" name="birthday" placeholder="birthday" value="{{ $user->birthday ? 'Chưa cập nhật' :  $user->birthday }}" type="date">
+                                        <input class="account__login--input" id="birthday" name="birthday" placeholder="birthday" value="{{ old('birthday',$user->birthday) }}" type="date">
+                                        @error('birthday')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="phone">Số điện thoại</label>
-                                        <input class="account__login--input" id="phone" name="phone" placeholder="Phone" value="{{ $user->phoneNumber ? 'Chưa cập nhật' :  $user->phoneNumber }}" type="number">
+                                        <input class="account__login--input" id="phone" name="phone" placeholder="Phone" value="{{ old('phone',$user->phoneNumber == null ? 'Chưa cập nhật' :  $user->phoneNumber) }}" type="number">
+                                        @error('phone')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
                                     </div>
                                     <div class="col-6">
                                         <label for="phone">Giới tính</label>
-                                        <select class="account__login--input" aria-label="Default select example">
-                                            <option selected>Chọn giới tính</option>
-                                            <option value="0">Nam</option>
-                                            <option value="1">Nữ</option>
+                                        <select class="account__login--input" name="sex">
+                                            <option selected value="">Chọn giới tính</option>
+                                            <option value="1"  {{ old('sex',$user->sex) == '1' ? 'selected' : '' }} >Nam</option>
+                                            <option value="2" {{ old('sex',$user->sex) == '2' ? 'selected' : '' }} >Nữ</option>
                                         </select>
+                                        @error('sex')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
                                     </div>
                                 </div>
                                 <button class="account__login--btn primary__btn" type="submit">Cập nhật</button>

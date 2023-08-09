@@ -23,6 +23,7 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                toastr()->error('Bạn đã đăng nhập rồi','OOPS');
                 return redirect(RouteServiceProvider::HOME);
             }
         }

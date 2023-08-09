@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 class userController extends Controller
 {
     public function index(){
@@ -31,10 +32,15 @@ class userController extends Controller
         if (Auth::attempt($credentials)) {
             // Đăng nhập thành công, chuyển hướng đến trang sau khi đăng nhập thành công
             toastr()->success('Đăng nhập thành công','Thành công');
-            return redirect()->route('home');
+            if(Auth::user()->role_id == 2){
+                return redirect()->route('admin.dashboard');
+            }else {
+                return redirect()->route('home');
+            }
         } else {
+            toastr()->error('Thông tin đăng nhập không chính xác','Thành công');
             // Đăng nhập thất bại, chuyển hướng đến trang đăng nhập với thông báo lỗi
-            return redirect()->route('login')->withErrors(['email' => 'Thông tin đăng nhập không chính xác']);
+            return redirect()->route('auth.login');
         }
     }
 
@@ -78,13 +84,43 @@ class userController extends Controller
         return view('client.pages.user.profile');
     }
 
-    public function info(){
 
-        return view('client.pages.user.info');
-    }
 
-    public function updateInfo(){
-
+    public function updateInfo(Request $request){
+        $request->validate(
+            [
+                'name' => 'required',
+                'email' => 'required',
+                'address' => 'required',
+                'birthday' => 'required|date',
+                'phone' => 'required|digits:10|numeric|regex:/^0/',
+                'sex' => 'required',
+            ],
+            [
+                'name.required' => 'Không để trống name',
+                'email.required' => 'Không để trống email',
+                'address.required' => 'Không để trống địa chỉ',
+                'birthday.required' => 'Không để trống năm sinh',
+                'birthday.date' => 'Năm sinh phải là định dạng thời gian',
+                'phone.required' => 'Không để trống số điện thoại',
+                'phone.digits' => 'Vui lòng điền đúng 10 số điện thoại',
+                'phone.regex' => 'Số điện thoại bắt buộc phải là số 0',
+                'phone.numeric' => 'Vui lòng điền số',
+                'sex.required' => 'Không để trống giới tính',
+            ]
+        );
+        User::find($request->idAuth)->update(
+            [
+                'name' => $request->name,
+                'email' => $request->email,
+                'address' => $request->address,
+                'birthday' => $request->birthday,
+                'phoneNumber' => $request->phone,
+                'sex' => $request->sex,
+            ]
+        );
+        toastr()->success('Cập nhật thành công','Thành công');
+        return redirect()->back();
     }
 
     public function logout(){

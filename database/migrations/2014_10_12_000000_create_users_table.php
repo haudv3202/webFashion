@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->date('birthday')->nullable();
             $table->string('phoneNumber',10)->nullable();
-            $table->string('avatar_url')->nullable();
             $table->integer('sex')->nullable();
             $table->bigInteger('status')->default(1);
             $table->string('token')->nullable();

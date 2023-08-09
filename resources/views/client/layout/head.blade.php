@@ -1,3 +1,4 @@
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <link rel="shortcut icon" type="image/x-icon" href="{{ asset('client/assets/img/favicon.ico') }}">
 
 <!-- ======= All CSS Plugins here ======== -->
@@ -10,3 +11,5 @@
 
 <!-- Custom Style CSS -->
 <link rel="stylesheet" href="{{ asset('client/assets/css/style.css') }}">
+<meta name="id_user" content="{{ isset(Auth::user()->id) ? Auth::user()->id : 'null' }}" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">

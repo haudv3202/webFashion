@@ -662,36 +662,37 @@ const offcanvasHeader = function () {
 };
 /* Mobile Menu Active */
 offcanvasHeader();
-
-// Increment & Decrement Qunatity Button
-const quantityWrapper = document.querySelectorAll(".quantity__box");
-if (quantityWrapper) {
-  quantityWrapper.forEach(function (singleItem) {
-    let increaseButton = singleItem.querySelector(".increase");
-    let decreaseButton = singleItem.querySelector(".decrease");
-
-    increaseButton.addEventListener("click", function (e) {
-      let input = e.target.previousElementSibling.children[0];
-      if (input.dataset.counter != undefined) {
-        let value = parseInt(input.value, 10);
-        value = isNaN(value) ? 0 : value;
-        value++;
-        input.value = value;
-      }
-    });
-
-    decreaseButton.addEventListener("click", function (e) {
-      let input = e.target.nextElementSibling.children[0];
-      if (input.dataset.counter != undefined) {
-        let value = parseInt(input.value, 10);
-        value = isNaN(value) ? 0 : value;
-        value < 1 ? (value = 1) : "";
-        value--;
-        input.value = value;
-      }
-    });
-  });
-}
+//
+// // Increment & Decrement Qunatity Button
+// const quantityWrapper = document.querySelectorAll(".quantity__box");
+// if (quantityWrapper) {
+//   quantityWrapper.forEach(function (singleItem) {
+//     let increaseButton = singleItem.querySelector(".increase");
+//     let decreaseButton = singleItem.querySelector(".decrease");
+//
+//     increaseButton.addEventListener("click", function (e) {
+//       let input = e.target.previousElementSibling.children[0];
+//       if (input.dataset.counter != undefined) {
+//         let value = parseInt(input.value, 10);
+//         value = isNaN(value) ? 0 : value;
+//         value++;
+//         input.value = value;
+//       }
+//     });
+//
+//     decreaseButton.addEventListener("click", function (e) {
+//         console.log('meme')
+//       let input = e.target.nextElementSibling.children[0];
+//       if (input.dataset.counter != undefined) {
+//         let value = parseInt(input.value, 10);
+//         value = isNaN(value) ? 0 : value;
+//         value < 1 ? (value = 1) : "";
+//         value--;
+//         input.value = value;
+//       }
+//     });
+//   });
+// }
 
 // Modal JS
 const openEls = document.querySelectorAll("[data-open]");
@@ -856,40 +857,61 @@ if (wrapper) {
 
 // Newsletter popup
 const newsletterPopup = function () {
-  let newsletterWrapper = document.querySelector(".newsletter__popup"),
-    newsletterCloseButton = document.querySelector(
-      ".newsletter__popup--close__btn"
-    ),
-    dontShowPopup = document.querySelector("#newsletter__dont--show"),
-    popuDontShowMode = localStorage.getItem("newsletter__show");
+    const newsletterWrapper = document.querySelector(".newsletter__popup");
+    const newsletterCloseButton = document.querySelector(".newsletter__popup--close__btn");
+    const dontShowPopup = document.querySelector("#newsletter__dont--show");
+    const popuDontShowMode = localStorage.getItem("newsletter__show");
 
-  if (newsletterWrapper && popuDontShowMode == null) {
-    window.addEventListener("load", (event) => {
-      setTimeout(function () {
-        document.body.classList.add("overlay__active");
-        newsletterWrapper.classList.add("newsletter__show");
+    const hideNewsletterPopup = function () {
+        document.body.classList.remove("overlay__active");
+        newsletterWrapper.classList.remove("newsletter__show");
+    };
 
-        document.addEventListener("click", function (event) {
-          if (!event.target.closest(".newsletter__popup--inner")) {
-            document.body.classList.remove("overlay__active");
-            newsletterWrapper.classList.remove("newsletter__show");
-          }
+    if (newsletterWrapper && popuDontShowMode == null) {
+        window.addEventListener("load", (event) => {
+            setTimeout(function () {
+                document.body.classList.add("overlay__active");
+                newsletterWrapper.classList.add("newsletter__show");
+
+                document.addEventListener("click", function (event) {
+                    if (!event.target.closest(".newsletter__popup--inner")) {
+                        hideNewsletterPopup();
+                    }
+                });
+
+                newsletterCloseButton.addEventListener("click", function () {
+                    hideNewsletterPopup();
+                });
+
+                dontShowPopup.addEventListener("click", function () {
+                    if (dontShowPopup.checked) {
+                        localStorage.setItem("newsletter__show", "true");
+                        // Thiết lập thời gian hết hạn là 24 giờ (24 * 60 * 60 giây)
+                    // * 60
+                        const expirationTime = 24  * 60 * 60 * 1000;
+                        const expirationDate = new Date().getTime() + expirationTime;
+                        localStorage.setItem("newsletter__show_expiration", expirationDate);
+                    } else {
+                        localStorage.removeItem("newsletter__show");
+                        localStorage.removeItem("newsletter__show_expiration");
+                    }
+                });
+
+            }, 3000);
         });
-
-        newsletterCloseButton.addEventListener("click", function () {
-          document.body.classList.remove("overlay__active");
-          newsletterWrapper.classList.remove("newsletter__show");
-        });
-
-        dontShowPopup.addEventListener("click", function () {
-          if (dontShowPopup.checked) {
-            localStorage.setItem("newsletter__show", true);
-          } else {
-            localStorage.removeItem("newsletter__show");
-          }
-        });
-      }, 3000);
-    });
-  }
+    } else {
+        // Kiểm tra thời gian hết hạn của item
+        const expirationDate = localStorage.getItem("newsletter__show_expiration");
+        if (expirationDate) {
+            const now = new Date().getTime();
+            if (now > parseInt(expirationDate)) {
+                // Nếu đã hết hạn, xóa thông tin popup và storage
+                hideNewsletterPopup();
+                localStorage.removeItem("newsletter__show");
+                localStorage.removeItem("newsletter__show_expiration");
+            }
+        }
+    }
 };
 newsletterPopup();
+

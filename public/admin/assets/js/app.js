@@ -554,7 +554,7 @@
   // data table validation
   $("#data-table, .data-table").DataTable({
     dom: "<'grid grid-cols-12 gap-5 px-6 mt-6'<'col-span-4'l><'col-span-8 flex justify-end'f><'#pagination.flex items-center'>><'min-w-full't><'flex justify-end items-center'p>",
-    paging: true,
+    paging: false,
     ordering: true,
     info: false,
     searching: true,
@@ -732,6 +732,21 @@
         $(".multiFilePreview #file-preview").append(img);
       };
       reader.readAsDataURL(file);
+    }
+  });
+  $(".multiFilePreviews input").on("change", function () {
+    $(".multiFilePreviews #file-previews").empty(); // clear any existing previews
+    var filesn = $(this)[0].files;
+    var count = filesn.length;
+    $(".multiFilePreviews #placeholders").text(count + " file(s) selected");
+    for (var i = 0; i < filesn.length; i++) {
+      var filess = filesn[i];
+      var reader = new FileReader();
+      reader.onload = function (events) {
+        var img = $("<img>").attr("src", events.target.result);
+        $(".multiFilePreviews #file-previews").append(img);
+      };
+      reader.readAsDataURL(filess);
     }
   });
   Dropzone.autoDiscover = false;

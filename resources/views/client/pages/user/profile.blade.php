@@ -7,243 +7,117 @@
     <!-- my account section start -->
     <section class="my__account--section section--padding">
         <div class="container">
-            <p class="account__welcome--text">Hello, Admin welcome to your dashboard!</p>
+
+
             <div class="my__account--section__inner border-radius-10 d-flex">
                 <div class="account__left--sidebar">
                     <h2 class="account__content--title h3 mb-20">My Profile</h2>
                     <ul class="account__menu">
-                        <li class="account__menu--list"><a href="{{ route('auth.info') }}">Profile</a></li>
-                        <li class="account__menu--list"><a href="my-account.html">Dashboard</a></li>
-                        <li class="account__menu--list"><a href="my-account-2.html">Addresses</a></li>
-                        <li class="account__menu--list"><a href="wishlist.html">Wishlist</a></li>
+                        @can('view-profile')
+                            <li class="account__menu--list"><a href="{{ route('auth.profile') }}">Profile</a></li>
+                        @endcan
+
+                        @can('view-dashboard')
+                            <li class="account__menu--list"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                        @endcan
+
+                        @can('view-addresses')
+                            <li class="account__menu--list"><a href="my-account-2.html">Addresses</a></li>
+                        @endcan
+
+                        @can('view-wishlist')
+                            <li class="account__menu--list"><a href="wishlist.html">Wishlist</a></li>
+                        @endcan
+
                         <li class="account__menu--list"><a href="{{ route('auth.logout') }}">Log Out</a></li>
                     </ul>
                 </div>
+                @can('view-profile')
                 <div class="account__wrapper">
                     <div class="account__content">
-                        <h2 class="account__content--title h3 mb-20">Orders History</h2>
+                        <h2 class="account__content--title h3 mb-20">Thông tin người dùng</h2>
                         <div class="account__table--area">
-                            <table class="account__table">
-                                <thead class="account__table--header">
-                                <tr class="account__table--header__child">
-                                    <th class="account__table--header__child--items">Order</th>
-                                    <th class="account__table--header__child--items">Date</th>
-                                    <th class="account__table--header__child--items">Payment Status</th>
-                                    <th class="account__table--header__child--items">Fulfillment Status</th>
-                                    <th class="account__table--header__child--items">Total</th>
-                                </tr>
-                                </thead>
-                                <tbody class="account__table--body mobile__none">
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">#2014</td>
-                                    <td class="account__table--body__child--items">February 06, 2022</td>
-                                    <td class="account__table--body__child--items">Paid</td>
-                                    <td class="account__table--body__child--items">Unfulfilled</td>
-                                    <td class="account__table--body__child--items">$40.00 USD</td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">#2024</td>
-                                    <td class="account__table--body__child--items">February 06, 2022</td>
-                                    <td class="account__table--body__child--items">Paid</td>
-                                    <td class="account__table--body__child--items">Fulfilled</td>
-                                    <td class="account__table--body__child--items">$44.00 USD</td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">#2164</td>
-                                    <td class="account__table--body__child--items">February 06, 2022</td>
-                                    <td class="account__table--body__child--items">Paid</td>
-                                    <td class="account__table--body__child--items">Unfulfilled</td>
-                                    <td class="account__table--body__child--items">$36.00 USD</td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">#2345</td>
-                                    <td class="account__table--body__child--items">February 06, 2022</td>
-                                    <td class="account__table--body__child--items">Paid</td>
-                                    <td class="account__table--body__child--items">Unfulfilled</td>
-                                    <td class="account__table--body__child--items">$87.00 USD</td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">#1244</td>
-                                    <td class="account__table--body__child--items">February 06, 2022</td>
-                                    <td class="account__table--body__child--items">Paid</td>
-                                    <td class="account__table--body__child--items">Fulfilled</td>
-                                    <td class="account__table--body__child--items">$66.00 USD</td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">#3455</td>
-                                    <td class="account__table--body__child--items">February 06, 2022</td>
-                                    <td class="account__table--body__child--items">Paid</td>
-                                    <td class="account__table--body__child--items">Fulfilled</td>
-                                    <td class="account__table--body__child--items">$55.00 USD</td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">#4566</td>
-                                    <td class="account__table--body__child--items">February 06, 2022</td>
-                                    <td class="account__table--body__child--items">Paid</td>
-                                    <td class="account__table--body__child--items">Unfulfilled</td>
-                                    <td class="account__table--body__child--items">$87.00 USD</td>
-                                </tr>
-                                </tbody>
-                                <tbody class="account__table--body mobile__block">
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">
-                                        <strong>Order</strong>
-                                        <span>#2014</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Date</strong>
-                                        <span>November 24, 2022</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Payment Status</strong>
-                                        <span>Paid</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Fulfillment Status</strong>
-                                        <span>Unfulfilled</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Total</strong>
-                                        <span>$40.00 USD</span>
-                                    </td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">
-                                        <strong>Order</strong>
-                                        <span>#2014</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Date</strong>
-                                        <span>November 24, 2022</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Payment Status</strong>
-                                        <span>Paid</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Fulfillment Status</strong>
-                                        <span>Unfulfilled</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Total</strong>
-                                        <span>$40.00 USD</span>
-                                    </td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">
-                                        <strong>Order</strong>
-                                        <span>#2014</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Date</strong>
-                                        <span>November 24, 2022</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Payment Status</strong>
-                                        <span>Paid</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Fulfillment Status</strong>
-                                        <span>Unfulfilled</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Total</strong>
-                                        <span>$40.00 USD</span>
-                                    </td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">
-                                        <strong>Order</strong>
-                                        <span>#2014</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Date</strong>
-                                        <span>November 24, 2022</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Payment Status</strong>
-                                        <span>Paid</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Fulfillment Status</strong>
-                                        <span>Unfulfilled</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Total</strong>
-                                        <span>$40.00 USD</span>
-                                    </td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">
-                                        <strong>Order</strong>
-                                        <span>#2014</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Date</strong>
-                                        <span>November 24, 2022</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Payment Status</strong>
-                                        <span>Paid</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Fulfillment Status</strong>
-                                        <span>Unfulfilled</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Total</strong>
-                                        <span>$40.00 USD</span>
-                                    </td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">
-                                        <strong>Order</strong>
-                                        <span>#2014</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Date</strong>
-                                        <span>November 24, 2022</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Payment Status</strong>
-                                        <span>Paid</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Fulfillment Status</strong>
-                                        <span>Unfulfilled</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Total</strong>
-                                        <span>$40.00 USD</span>
-                                    </td>
-                                </tr>
-                                <tr class="account__table--body__child">
-                                    <td class="account__table--body__child--items">
-                                        <strong>Order</strong>
-                                        <span>#2014</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Date</strong>
-                                        <span>November 24, 2022</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Payment Status</strong>
-                                        <span>Paid</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Fulfillment Status</strong>
-                                        <span>Unfulfilled</span>
-                                    </td>
-                                    <td class="account__table--body__child--items">
-                                        <strong>Total</strong>
-                                        <span>$40.00 USD</span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                            <form action="{{ route('auth.update') }}" method="post">
+                                @csrf
+                                @php
+                                    $user = \Illuminate\Support\Facades\Auth::user();
+                                @endphp
+                                <input type="hidden" name="idAuth" value="{{ $user->id }}">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="username">Tên tài khoản</label>
+                                        <input class="account__login--input" id="username" name="name" placeholder="Name" value="{{ old('name',$user->name) }}" type="text">
+                                        @error('name')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="email">Email</label>
+                                        <input class="account__login--input" id="email" name="email" placeholder="Email Address" value="{{ old('email',$user->email) }}" type="text">
+                                        @error('email')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="address">Địa Chỉ</label>
+                                        <input class="account__login--input" id="address" name="address" placeholder="Address" value="{{ old('address',$user->address == null ? 'Chưa cập nhật' :  $user->address) }}" type="text">
+                                        @error('address')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="birthday">Ngày sinh</label>
+                                        <input class="account__login--input" id="birthday" name="birthday" placeholder="birthday" value="{{ old('birthday',$user->birthday) }}" type="date">
+                                        @error('birthday')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="phone">Số điện thoại</label>
+                                        <input class="account__login--input" id="phone" name="phone" placeholder="Phone" value="{{ old('phone',$user->phoneNumber == null ? 'Chưa cập nhật' :  $user->phoneNumber) }}" type="number">
+                                        @error('phone')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="phone">Giới tính</label>
+                                        <select class="account__login--input" name="sex">
+                                            <option selected value="">Chọn giới tính</option>
+                                            <option value="1"  {{ old('sex',$user->sex) == '1' ? 'selected' : '' }} >Nam</option>
+                                            <option value="2" {{ old('sex',$user->sex) == '2' ? 'selected' : '' }} >Nữ</option>
+                                        </select>
+                                        @error('sex')
+                                        <div class="text-danger mb-4" >
+                                            🔴 <span>{{ $message }}</span>
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <button class="account__login--btn primary__btn" type="submit">Cập nhật</button>
+                            </form>
                         </div>
                     </div>
                 </div>
+                @endcan
+
+                @can('title-admin')
+                    <div class="account__wrapper">
+                        <div class="account__content">
+                            <p class="account__welcome--text text-danger">Hello, Admin welcome to your dashboard!</p>
+
+                        </div>
+                    </div>
+                @endcan
             </div>
         </div>
     </section>

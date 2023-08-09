@@ -6,7 +6,7 @@
   Version: 1.0.0
 
   ----------------------------
-  [Table of contents CSS] 
+  [Table of contents CSS]
   ----------------------------
 
     1. Base CSS
@@ -14,7 +14,7 @@
     3. Slider css
     4. Product card css
     5. Banner css
-    6. Blog css 
+    6. Blog css
     7. Testimonial css
     8. Featured services css
     9. Footer css
@@ -3865,11 +3865,10 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-/* 
-    3. Slider css 
+/*
+    3. Slider css
 */
-.home1__slider--bg {
-  background: url(../img/slider/home1-slider1.png);
+.home1__slider--bg0 {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -3877,13 +3876,13 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 @media only screen and (max-width: 767px) {
-  .home1__slider--bg {
+  .home1__slider--bg0 {
     background-position: 0%;
   }
 }
 
-.home1__slider--bg.two {
-  background: url(../img/slider/home1-slider2.png);
+.home1__slider--bg1 {
+
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -3891,13 +3890,13 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 @media only screen and (max-width: 767px) {
-  .home1__slider--bg.two {
+  .home1__slider--bg1 {
     background-position: 0%;
   }
 }
 
-.home1__slider--bg.three {
-  background: url(../img/slider/home1-slider3.png);
+.home1__slider--bg2 {
+
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -3905,7 +3904,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 @media only screen and (max-width: 767px) {
-  .home1__slider--bg.three {
+  .home1__slider--bg2 {
     background-position: 0%;
   }
 }
@@ -4223,8 +4222,8 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-left: 0;
 }
 
-/* 
-    4. Product card css 
+/*
+    4. Product card css
 */
 .swiper:hover .swiper__nav--btn {
   opacity: 1;
@@ -4859,7 +4858,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /*
-   5. Banner css 
+   5. Banner css
 */
 .banner__items--thumbnail {
   display: block;
@@ -6097,8 +6096,8 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-/* 
-    6. Blog css 
+/*
+    6. Blog css
 */
 .blog__items:hover .blog__thumbnail--img {
   -webkit-transform: scale(1.05);
@@ -6257,7 +6256,7 @@ input[type="number"]::-webkit-outer-spin-button {
   }
 }
 
-/* 
+/*
     7. Testimonial css
 */
 @media only screen and (max-width: 767px) {
@@ -12675,7 +12674,7 @@ details > summary::-webkit-details-marker {
   }
 }
 
-/* 
+/*
     29. Newsletter popup css
 */
 /* ANIMATIONS

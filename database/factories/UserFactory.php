@@ -24,7 +24,6 @@ class UserFactory extends Factory
             'address' => $this->faker->unique()->address(),
             'birthday' => $this->faker->unique()->date(),
             'phoneNumber' => '0123456789',
-            'avatar_url' => $this->faker->unique()->imageUrl(),
             'sex' => 1,
             'status' => 1,
             'token' => '',
